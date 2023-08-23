@@ -1,0 +1,82 @@
+$color: lightblue;
+
+body {
+    background-color: $color;
+    color: #000;
+
+    select {
+        display:table-row;
+    }
+    option {
+        display:table-cell;
+    }
+
+    .monSite {
+        display: flex;
+        justify-content: center;
+
+        #quoteBloc {
+            width: 50%;
+            border-radius: 5px;
+            padding: 3rem;
+            position: relative;
+
+            #quoteBtn {
+                margin-bottom: 1rem;
+            }
+            #quoteLine {
+                font-size: 2rem;
+            }
+            #quoteAuthor {
+                text-align: end;
+            }
+
+            #quoteLoader {
+                border: 12px solid #f3f3f3;
+                border-radius: 50%;
+                border-top: 12px solid #444444;
+                width: 70px;
+                height: 70px;
+                animation: spin 1s linear infinite;
+            }        
+            .center {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+            }        
+            @keyframes spin {
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+            #emojis {
+                font-size: 2rem;
+                padding: 2rem;
+            }
+        
+        }
+
+        #emojiBloc {
+            background-color: #f3f3f3;
+            border-radius: 5px;
+            padding: 3rem;
+
+            #emojiList {
+                font-size: 2rem;
+            }
+            .clickable:hover {
+                background-color: blue;
+                cursor: pointer;
+            }
+            #precEmojiGroupBtn {
+                display: none;
+            }
+        }
+        
+    }
+
+    
+}

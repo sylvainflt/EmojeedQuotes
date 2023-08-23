@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>JavaScript</title>
+    <script type="module" src="./main.min.js"></script>
+</head>
+<body>    
+    <h1>Mon Site</h1>
+    <div class="monSite">        
+        <div id="quoteBloc">
+            <h2>Quote</h2>
+            <div id="quoteLoader" class="center"></div>            
+            <div id="quoteContent">     
+                <div>
+                    <select id="quoteCategory">
+                        <option value="">all</option>
+                        <option value="amazing">amazing</option>
+                        <option value="faith">faith</option>
+                        <option value="great">great</option>
+                        <option value="learning">learning</option>
+                        <option value="life">life</option>
+                        <option value="love">love</option>
+                    </select>
+                    <button id="quoteBtn">Quote</button>
+                </div>                           
+                <div class="quote" id="quote">
+                    <div id="quoteLine"></div>
+                    <div id="quoteAuthor"></div>
+                    <div id="emojis"></div>
+                </div>
+            </div>
+        </div>
+        <div id="emojiBloc">            
+            <div>
+                <select id="emojiGroupSelect">
+                    <option value="smileys_emotion">smileys_emotion</option>
+                    <option value="people_body">people_body</option>
+                    <option value="component">component</option>
+                    <option value="animals_nature">animals_nature</option>
+                    <option value="food_drink">food_drink</option>
+                    <option value="travel_places">travel_places</option>
+                    <option value="activities">activities</option>
+                    <option value="objects">objects</option>
+                    <option value="symbols">symbols</option>
+                    <option value="flags">flags</option>
+                    
+                </select>                
+            </div> 
+            <div>
+                <table id="emojiList"></table>
+                <button id="precEmojiGroupBtn">précédent</button>
+                <button id="nextEmojiGroupBtn">suite</button>
+            </div>
+            
+        </div>
+        
+    </div>
+</body>
+</html>
