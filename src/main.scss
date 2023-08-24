@@ -5,10 +5,16 @@ $color: lightblue;
     src:
       url("winter_wind/Winter Wind.otf") format("opentype"),
   }
+@font-face {
+    font-family: "Roboto";
+    src:
+        url("roboto/Roboto-Regular.ttf") 
+}
 
 body {
     background-color: $color;
     color: #000;
+    font-family: "Roboto";
 
     h1 {
         text-align: center;
@@ -16,12 +22,22 @@ body {
         padding: 3rem 3rem 0 3rem;
         font-family: "WinterWind";
         margin-bottom: 0;
+
+        background: linear-gradient(120deg, #379eff7a 40%, #0e0e83 60%);
+        background-clip: border-box;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
     .uyc {
         text-align: center;
         font-size: 2rem;
         font-family: "WinterWind";
         margin-top: 0;
+
+        background: linear-gradient(120deg, #e6f5137a 40%, #830e0e 60%);
+        background-clip: border-box;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 
     select {
@@ -76,8 +92,10 @@ body {
             }
             #emojis {
                 font-size: 2rem;
-                height: 3rem;
+                height: 4rem;
                 padding-left: 4rem;
+                display: flex;
+                align-items: center;
             }
         
         }
@@ -100,6 +118,13 @@ body {
             background-color: rgba(128, 128, 128, .8);
             cursor: pointer;
             border-radius: 3px;
+        }
+        .clickableBigger{
+            transition: all .5s;
+        }
+        .clickableBigger:hover {
+            cursor: pointer;
+            font-size: 3rem;
         }
     }
 

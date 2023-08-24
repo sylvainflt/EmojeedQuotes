@@ -72,7 +72,7 @@ function createEmojiTD(element, key){
     console.log(`${element.character}`)
     
     const tdEmojeed = document.createElement("td")
-    tdEmojeed.className = "clickable"
+    tdEmojeed.className = "clickableBigger"
     tdEmojeed.id = `emojeed${key}`
     const newCharacter = document.createTextNode(element.character);
     tdEmojeed.appendChild(newCharacter)
