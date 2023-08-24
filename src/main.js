@@ -20,7 +20,7 @@ function getQuoteBackground(){
 function getQuoteContent() {
   
   document.querySelector("#quoteContent").style.visibility = "hidden";
-  document.querySelector("#quoteLoader").style.visibility = "visible";
+  document.querySelector("#quoteLoader").style.display = "inline";
 
   let category = document.querySelector("#quoteCategory").value
   if(category !== "") {
@@ -35,9 +35,13 @@ function getQuoteContent() {
     if(data) {  
       //console.log(JSON.parse(data))
       quoteLine.innerHTML = `"${JSON.parse(data)[0].quote}"`
-      quoteAuthor.innerHTML = `- ${JSON.parse(data)[0].author}`
+      quoteAuthor.href = `https://fr.wikipedia.org/wiki/${JSON.parse(data)[0].author}`
+      quoteAuthor.innerHTML = JSON.parse(data)[0].author
+      quoteAuthor.target = "_blank"
+
+      document.querySelector("#emojis").innerHTML = ""
       
-      document.querySelector("#quoteLoader").style.visibility = "hidden";
+      document.querySelector("#quoteLoader").style.display = "none";
       document.querySelector("#quoteContent").style.visibility = "visible";
     }
     else quote.innerHTML = ""
@@ -49,24 +53,38 @@ function getQuoteContent() {
 }
 
 /**
- * fonction qui retourne un element TD pour l'emoji en question
+ * fonction qui retourne un element TD pour l'emoji à afficher dans la table à gauche, et qui créé l'émoji 
+ * sous la citation
  * @param {*} element 
  * @param {*} key 
  * @returns un element TD
  */
 function createEmojiTD(element, key){
-  const td = document.createElement("td")
-  td.className = "clickable"
-  td.id = `emoji${key}`
+  const tdEmojiForTable = document.createElement("td")
+  tdEmojiForTable.className = "clickable"
+  tdEmojiForTable.id = `emoji${key}`
 
-  const newContent = document.createTextNode(element.character);
-  td.appendChild(newContent);
+  const character = document.createTextNode(element.character);
+  tdEmojiForTable.appendChild(character);
 
-  td.addEventListener('click', function(){
+  tdEmojiForTable.addEventListener('click', function(){
+
     console.log(`${element.character}`)
-    document.querySelector("#emojis").innerHTML += `${element.character}`
+    
+    const tdEmojeed = document.createElement("td")
+    tdEmojeed.className = "clickable"
+    tdEmojeed.id = `emojeed${key}`
+    const newCharacter = document.createTextNode(element.character);
+    tdEmojeed.appendChild(newCharacter)
+
+    tdEmojeed.addEventListener('click', function(){
+      document.querySelector("#emojis").removeChild(tdEmojeed)
+    })
+
+    document.querySelector("#emojis").appendChild(tdEmojeed)
+
   })
-  return td
+  return tdEmojiForTable
 }
 
 /**

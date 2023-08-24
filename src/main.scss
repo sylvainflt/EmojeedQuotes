@@ -1,8 +1,28 @@
 $color: lightblue;
 
+@font-face {
+    font-family: "WinterWind";
+    src:
+      url("winter_wind/Winter Wind.otf") format("opentype"),
+  }
+
 body {
     background-color: $color;
     color: #000;
+
+    h1 {
+        text-align: center;
+        font-size: 4rem;
+        padding: 3rem 3rem 0 3rem;
+        font-family: "WinterWind";
+        margin-bottom: 0;
+    }
+    .uyc {
+        text-align: center;
+        font-size: 2rem;
+        font-family: "WinterWind";
+        margin-top: 0;
+    }
 
     select {
         display:table-row;
@@ -27,8 +47,10 @@ body {
             #quoteLine {
                 font-size: 2rem;
             }
-            #quoteAuthor {
+            #quoteAuthorDiv {
                 text-align: end;
+                font-size: 1.5rem;
+                padding: 2rem;
             }
 
             #quoteLoader {
@@ -54,7 +76,8 @@ body {
             }
             #emojis {
                 font-size: 2rem;
-                padding: 2rem;
+                height: 3rem;
+                padding-left: 4rem;
             }
         
         }
@@ -67,15 +90,17 @@ body {
             #emojiList {
                 font-size: 2rem;
             }
-            .clickable:hover {
-                background-color: blue;
-                cursor: pointer;
-            }
+            
             #precEmojiGroupBtn {
                 display: none;
             }
         }
-        
+     
+        .clickable:hover {
+            background-color: rgba(128, 128, 128, .8);
+            cursor: pointer;
+            border-radius: 3px;
+        }
     }
 
     
