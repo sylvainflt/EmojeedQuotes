@@ -48,6 +48,7 @@ function getQuoteContent() {
   })
   .catch((error) => {
     console.log(error)
+    document.querySelector("#quoteContent").innerHTML = "Erreur de chargement. Rééssayer plus tard.";
   })
   
 }
@@ -164,7 +165,7 @@ function emojiGroupSelectChange() {
   precEmojiGroupBtn.style.display = "none"
   getEmojiContentByGroup()
 }
-document.addEventListener('DOMContentLoaded', getQuote)
+getQuote()
 quoteBtn.addEventListener('click', getQuote)
 
 getEmojiContentByGroup()

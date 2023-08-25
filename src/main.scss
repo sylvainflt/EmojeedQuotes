@@ -49,7 +49,12 @@ body {
 
     .monSite {
         display: flex;
-        justify-content: center;
+        justify-content: center;        
+
+        @media screen and (max-width: 800px) {
+            flex-direction: column;
+            align-items: center;
+        }
 
         #quoteBloc {
             width: 50%;
@@ -104,6 +109,14 @@ body {
             background-color: #f3f3f3;
             border-radius: 5px;
             padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            @media screen and (max-width: 800px) {
+                width: 50%;
+            }
 
             #emojiList {
                 font-size: 2rem;
