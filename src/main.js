@@ -48,7 +48,7 @@ function getQuoteContent() {
   })
   .catch((error) => {
     console.log(error)
-    document.querySelector("#quoteContent").innerHTML = "Erreur de chargement. Rééssayer plus tard.";
+    document.querySelector("#quoteContent").innerHTML = "Erreur de chargement. Rééssayer plus tard."
   })
   
 }
