@@ -1,9 +1,10 @@
 import "./main.scss"
+import html2canvas from 'html2canvas';
 
 // une variable qui stocke l'offset des emojiGroups pour pagination
 let emojiGroupsOffset = 0
-
-const quoteBtn = document.querySelector("#quoteBtn")
+// une variable qui enregistre le nom de l'utilisateur
+let user = ""
 
 /**
  * fonction qui choisi une couleur de fond au hasard, et qui va chercher une citation
@@ -19,6 +20,8 @@ function getQuoteBackground(){
 
 function getQuoteContent() {
   
+  console.log("getQuoteContent()")
+
   document.querySelector("#quoteContent").style.visibility = "hidden";
   document.querySelector("#quoteLoader").style.display = "inline";
 
@@ -33,13 +36,15 @@ function getQuoteContent() {
   })
   .then(data => { 
     if(data) {  
-      //console.log(JSON.parse(data))
+      //console.log(JSON.parse(data))     
+
       quoteLine.innerHTML = `"${JSON.parse(data)[0].quote}"`
       quoteAuthor.href = `https://fr.wikipedia.org/wiki/${JSON.parse(data)[0].author}`
       quoteAuthor.innerHTML = JSON.parse(data)[0].author
       quoteAuthor.target = "_blank"
 
       document.querySelector("#emojis").innerHTML = ""
+      //authorCommentSpan.innerHTML = ""
       
       document.querySelector("#quoteLoader").style.display = "none";
       document.querySelector("#quoteContent").style.visibility = "visible";
@@ -48,6 +53,8 @@ function getQuoteContent() {
   })
   .catch((error) => {
     console.log(error)
+    document.querySelector("#quoteLoader").style.display = "none";
+    document.querySelector("#quoteContent").style.visibility = "visible";
     document.querySelector("#quoteContent").innerHTML = "Erreur de chargement. Rééssayer plus tard."
   })
   
@@ -165,10 +172,115 @@ function emojiGroupSelectChange() {
   precEmojiGroupBtn.style.display = "none"
   getEmojiContentByGroup()
 }
-getQuote()
+
+document.addEventListener('DOMContentLoaded', getQuote)
+
 quoteBtn.addEventListener('click', getQuote)
+
+function setPseudo(){
+  // on demande le pseudo de l'utilisateur
+  const pseudo = prompt("Enter your name : ")
+  // on l'affiche dans la zone de commentaires emojis
+  authorCommentSpan.innerHTML = pseudo + " says : "
+  user = pseudo
+}
+
+// on ajoute un listener au bouton de commentaires pour demander le pseudo
+commentBtn.addEventListener('click', function(){
+  setPseudo()
+  commentBtn.style.display = "none"
+  commandLine.style.display = "flex"
+  emojiBloc.style.display = "flex"
+})
 
 getEmojiContentByGroup()
 emojiGroupSelect.addEventListener('change', emojiGroupSelectChange)
 precEmojiGroupBtn.addEventListener('click', getPrecEmojiGroup)
 nextEmojiGroupBtn.addEventListener('click', getNextEmojiGroup)
+
+changePseudoBtn.addEventListener('click', function (){
+  setPseudo()
+})
+
+/**
+ * EventListener sur le bouton d'envoi d'e-mail
+ */
+sendBtn.addEventListener('click', function (){
+
+  if(authorCommentSpan.innerHTML !== " says : ") {
+  
+    const receiver = prompt("Veuillez entrer l'adresse e-mail à qui envoyer: ")
+    /**
+     * fonction d'envoi d'e-mail, on prépare d'abord la partie à envoyer
+     */
+    let newBody = document.querySelector('#quoteBloc')
+    newBody.querySelector('#selectionCategory').style.display = "none"
+    newBody.querySelector('#commandLine').style.display = "none"
+    let nouvelleImg = document.createElement("img");
+    
+    html2canvas(newBody).then(function (canvas) {
+      //document.body.appendChild(canvas)
+      nouvelleImg.src = canvas.toDataURL()
+      //console.log("image "+nouvelleImg)
+
+      //document.body.appendChild(nouvelleImg);
+
+      Email.send({
+        SecureToken : "957f0f1a-faea-407a-a73d-2d5dffada68e",
+        To : receiver,
+        From : "EmojeedQuotes<contact@sylvainfoucault.com>",
+        Subject : "You got an EmojeedQuote",
+        Body : `You received a message from ${user}. <br/><br/><br/>
+         This e-mail is sent by the EmojeedQuote web application. <br/>
+         The e-mail is sent through ElasticEmail and my personal domain. <br/>
+         Person in charge : Sylvain Foucault, adress : 13 rue des Francs Muriers 80000 Amiens FRANCE, phone : +33 768766012 `,
+        Attachments : [
+          {
+            name : "emojeedQuote.png",
+            data : nouvelleImg.src
+          }
+        ]
+      }).then(
+        message => alert(message)        
+      )
+      newBody.querySelector('#selectionCategory').style.display = "block"
+      newBody.querySelector('#commandLine').style.display = "flex"
+    })
+    //console.log(nouvelleImg)
+
+    /*
+    fetch("https://api.elasticemail.com/v4/emails/transactional", 
+      { headers: {
+                    'X-ElasticEmail-ApiKey':'282193FD1292CFF4CB31C4CC63D0A75CBB06594CFB60A887B27A6FD24F16601908B9F0992ABCA56CBBE49E59F783EF2E', 
+                    },
+            method: 'POST',        
+            data: {          
+              "Recipients":[  
+                {  
+                    "To":"sylvainfoucault1@gmail.com"
+                }
+              ],
+              "Content":{  
+                "From":"sylvainfoucault1@gmail.com",
+                "Subject":"Hello world",
+                "Body":"<html><head></head><body><p>Hello,</p>This is my first transactional email.</p></body></html>"            
+              },
+              "message":"contenu du message"
+              
+            }
+      }
+    )
+    .then(response => {
+      if(response.status === 200) return response.text()
+    })
+    .catch((error) => {
+      console.log(error)
+      document.querySelector("#quoteLoader").style.display = "none";
+      document.querySelector("#quoteContent").style.visibility = "visible";
+      document.querySelector("#quoteContent").innerHTML = error
+    })*/
+  }
+  else {
+    setPseudo()
+  }
+})

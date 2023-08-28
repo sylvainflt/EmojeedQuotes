@@ -2,35 +2,39 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>JavaScript</title>
+    <title>EmojeedQuotes</title>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script type="module" src="./main.min.js"></script>
 </head>
 <body>    
     <h1>EmojeedQuotes</h1>
     <h2 class="uyc">Just play with it !</h2>
+    
     <div class="monSite">        
         <div id="quoteBloc">
-            <h2>Quote</h2>
+            <div id="selectionCategory">
+                <select id="quoteCategory">
+                    <option value="">all</option>
+                    <option value="amazing">amazing</option>
+                    <option value="faith">faith</option>
+                    <option value="great">great</option>
+                    <option value="learning">learning</option>
+                    <option value="life">life</option>
+                    <option value="love">love</option>
+                </select>
+                <button id="quoteBtn">Quote</button>
+            </div>   
             <div id="quoteLoader" class="center"></div>            
-            <div id="quoteContent">     
-                <div>
-                    <select id="quoteCategory">
-                        <option value="">all</option>
-                        <option value="amazing">amazing</option>
-                        <option value="faith">faith</option>
-                        <option value="great">great</option>
-                        <option value="learning">learning</option>
-                        <option value="life">life</option>
-                        <option value="love">love</option>
-                    </select>
-                    <button id="quoteBtn">Quote</button>
-                </div>                           
+            <div id="quoteContent">  
+                <h2>Quote : </h2>                                           
                 <div class="quote" id="quote">
                     <div id="quoteLine"></div>
                     <div id="quoteAuthorDiv">- <a id="quoteAuthor"></a></div>
-                    <table id="emojis"></table>
+                    <button id="commentBtn">comment</button>
+                    <span id="authorCommentSpan"></span><table id="emojis"></table>                    
                 </div>
             </div>
+            <div id="commandLine"><button id="changePseudoBtn">change name</button><button id="sendBtn">send</button></div>
         </div>
         <div id="emojiBloc">            
             <div>
@@ -49,11 +53,12 @@
                 </select>                
             </div> 
             <div>
-                <table id="emojiList"></table>
+                <table id="emojiList"></table>                
+            </div>
+            <div>
                 <button id="precEmojiGroupBtn">précédent</button>
                 <button id="nextEmojiGroupBtn">suite</button>
             </div>
-            
         </div>
         
     </div>

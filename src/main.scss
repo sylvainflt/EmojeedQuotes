@@ -30,9 +30,9 @@ body {
     }
     .uyc {
         text-align: center;
-        font-size: 2rem;
+        font-size: 2.5rem;
         font-family: "WinterWind";
-        margin-top: 0;
+        margin: 0 0 5rem 0;
 
         background: linear-gradient(120deg, #e6f5137a 40%, #830e0e 60%);
         background-clip: border-box;
@@ -53,7 +53,7 @@ body {
 
         @media screen and (max-device-width: 800px) {
             flex-direction: column;
-            align-items: center;
+            align-items: center;            
         }
 
         #quoteBloc {
@@ -62,8 +62,15 @@ body {
             padding: 3rem;
             position: relative;
 
+            @media screen and (max-device-width: 800px) {
+                width: 80%;        
+            }
+
+            #quoteContent {
+                font-size: 3rem;
+            }
             #quoteBtn {
-                margin-bottom: 1rem;
+                margin: 0 0 1rem 1rem;
             }
             #quoteLine {
                 font-size: 2rem;
@@ -71,8 +78,14 @@ body {
             #quoteAuthorDiv {
                 text-align: end;
                 font-size: 1.5rem;
-                padding: 2rem;
+                padding: 2rem 2rem 0 2rem;
             }
+            #commandLine {
+                display: none;
+                margin-top: 2rem;
+                gap: 1rem;
+                justify-content: flex-end;
+            }            
 
             #quoteLoader {
                 border: 12px solid #f3f3f3;
@@ -95,12 +108,18 @@ body {
                     transform: rotate(360deg);
                 }
             }
-            #emojis {
+            #authorCommentSpan {
                 font-size: 2rem;
+            }
+            #emojis {
+                font-size: 3rem;
                 height: 4rem;
                 padding-left: 4rem;
                 display: flex;
                 align-items: center;
+                @media screen and (max-device-width: 800px) {
+                    font-size: 4rem;       
+                }
             }
         
         }
@@ -109,21 +128,26 @@ body {
             background-color: #f3f3f3;
             border-radius: 5px;
             padding: 3rem;
-            display: flex;
+            display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            gap: 2rem;
 
             @media screen and (max-device-width: 800px) {
-                width: 50%;
+                width: 80%;
             }
 
             #emojiList {
                 font-size: 2rem;
+                @media screen and (max-device-width: 800px) {
+                    font-size: 4rem;       
+                }
             }
             
             #precEmojiGroupBtn {
                 display: none;
+                margin-right: 1rem;
             }
         }
      
@@ -133,13 +157,17 @@ body {
             border-radius: 3px;
         }
         .clickableBigger{
-            transition: all .5s;
+            transition: all .2s;
         }
         .clickableBigger:hover {
             cursor: pointer;
-            font-size: 3rem;
+            font-size: 4rem;
         }
     }
 
-    
+    @media screen and (max-device-width: 800px) {
+        select, button {
+            font-size: 2rem;
+        }        
+    }
 }
