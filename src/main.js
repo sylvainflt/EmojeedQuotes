@@ -202,6 +202,10 @@ changePseudoBtn.addEventListener('click', function (){
   setPseudo()
 })
 
+closeModalSendEmail.onclick = function () {
+  sendEmail.style.display = "none"
+}
+
 /**
  * EventListener sur le bouton d'envoi d'e-mail
  */
@@ -210,12 +214,16 @@ sendBtn.addEventListener('click', function (){
   if(authorCommentSpan.innerHTML !== " says : ") {
   
     const receiver = prompt("Veuillez entrer l'adresse e-mail à qui envoyer: ")
-    /**
-     * fonction d'envoi d'e-mail, on prépare d'abord la partie à envoyer
-     */
+    
+    // on ouvre la modal
+    sendEmail.style.display = "flex"
+
+    // on récupère la partie citation avec commentaire, à laquelle on retire les boutons pour l'envoyer en pièce jointe
     let newBody = document.querySelector('#quoteBloc')
     newBody.querySelector('#selectionCategory').style.display = "none"
     newBody.querySelector('#commandLine').style.display = "none"
+
+    // on fait une image qui va contenir la partie citation ci-dessus
     let nouvelleImg = document.createElement("img");
     
     html2canvas(newBody).then(function (canvas) {
@@ -225,11 +233,12 @@ sendBtn.addEventListener('click', function (){
 
       //document.body.appendChild(nouvelleImg);
 
+      // Envoi de l'e-mail avec l'image en pièce jointe
       Email.send({
         SecureToken : "957f0f1a-faea-407a-a73d-2d5dffada68e",
         To : receiver,
         From : "EmojeedQuotes<contact@sylvainfoucault.com>",
-        Subject : "You got an EmojeedQuote",
+        Subject : "😀💬👋 You got an EmojeedQuote 📫🧾 from "+user,
         Body : `You received a message from ${user}. <br/><br/><br/>
          This e-mail is sent by the EmojeedQuote web application. <br/>
          The e-mail is sent through ElasticEmail and my personal domain. <br/>
@@ -241,10 +250,12 @@ sendBtn.addEventListener('click', function (){
           }
         ]
       }).then(
-        message => alert(message)        
+        message => statusSendEmail.innerHTML = `E-mail status : ${message}`  
+
       )
       newBody.querySelector('#selectionCategory').style.display = "block"
       newBody.querySelector('#commandLine').style.display = "flex"
+      statusSendEmail.innerHTML = `Sending e-mail ...`
     })
     //console.log(nouvelleImg)
 
